@@ -1,0 +1,34 @@
+{
+    "name": "lmmtfy/lmmtfy-php",
+    "description": "Lmmtfy API client",
+    "homepage": "https://lmmtfy.io/",
+    "version": "0.1",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lmmtfy",
+            "email": "hello@lmmtfy.io"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lmmtfy\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.4",
+        "guzzlehttp/guzzle": "~5.0"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    },
+    "scripts": {
+        "phpdoc": "phpdoc"
+    },
+    "archive": {
+        "exclude": [
+            ".idea/",
+            "docs/"
+        ]
+    }
+}
