@@ -1,4 +1,5 @@
 <?php
+
 namespace Lmmtfy;
 
 use GuzzleHttp\Client;
@@ -17,34 +18,31 @@ abstract class ApiClient
     /**
      * Client used to make requests
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
-    protected $oClient;
+    protected $client;
 
     /**
      * Valid types to minify
      *
-     * @var array
+     * @var string[]
      */
-    protected $aValidTypes = [
-        'css', 'js',
-        'jpg', 'png', 'gif', 'svg',
+    protected $validTypes = [
+        'css', 'js', 'jpg', 'png',
     ];
 
     /**
      * Initialize a new API client
      *
-     * @param string $sApiId     API ID
-     * @param string $sApiSecret API secret
-     * @param string $sEndpoint  Endpoint used for making API requests
+     * @param string $apiId     API ID
+     * @param string $apiSecret API secret
+     * @param string $endpoint  Endpoint used for making API requests
      */
-    public function __construct($sApiId = null, $sApiSecret = null, $sEndpoint = self::ENDPOINT)
+    public function __construct(string $apiId = null, string $apiSecret = null, string $endpoint = self::ENDPOINT)
     {
-        $this->oClient = new Client([
-            'base_url' => $sEndpoint,
-            'defaults' => [
-                'auth' => ($sApiId && $sApiSecret ? [$sApiId, $sApiSecret] : null),
-            ]
+        $this->client = new Client([
+            'base_uri' => $endpoint,
+            'auth'     => ($apiId && $apiSecret ? [$apiId, $apiSecret] : null),
         ]);
     }
 }

@@ -2,7 +2,7 @@
     "name": "lmmtfy/lmmtfy-php",
     "description": "Lmmtfy API client",
     "homepage": "https://lmmtfy.io/",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -16,8 +16,8 @@
         }
     },
     "require": {
-        "php": ">=5.4",
-        "guzzlehttp/guzzle": "~5.0"
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "2.*"

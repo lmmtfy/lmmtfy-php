@@ -1,4 +1,5 @@
 <?php
+
 namespace Lmmtfy;
 
 use GuzzleHttp\Client;
@@ -13,60 +14,59 @@ class LmmtfyResponse
     /**
      * Client used to make the request
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
-    private $oClient;
+    private $client;
 
     /**
      * Client URI to make the request to
      *
      * @var string
      */
-    private $sUri;
+    private $uri;
 
     /**
      * Options used for minifing
      *
      * @var array
      */
-    private $aMinifyOptions;
+    private $minifyOptions;
 
     /**
      * Content to minify
      *
      * @var string|resource
      */
-    private $sContent;
+    private $content;
 
     /**
      * Initialize a new LmmtfyResponse object
      *
-     * @param \GuzzleHttp\Client $oClient        Client used to make the request
-     * @param string             $sUri           Uri to make the request to
-     * @param array              $aMinifyOptions Options used for minifing
-     * @param string|resource    $sContent       Content to minify
+     * @param \GuzzleHttp\Client $client        Client used to make the request
+     * @param string             $uri           Uri to make the request to
+     * @param array              $minifyOptions Options used for minifing
+     * @param string|resource    $content       Content to minify
      */
-    public function __construct(Client $oClient, $sUri, array $aMinifyOptions, $sContent)
+    public function __construct(Client $client, string $uri, array $minifyOptions, $content)
     {
-        $this->oClient = $oClient;
-        $this->sUri = $sUri;
-        $this->aMinifyOptions = $aMinifyOptions;
-        $this->sContent = $sContent;
+        $this->client = $client;
+        $this->uri = $uri;
+        $this->minifyOptions = $minifyOptions;
+        $this->content = $content;
     }
 
     /**
      * Makes a POST request to minify something
      *
-     * @param array $aOptions
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @param array $options
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    private function call(array $aOptions = [])
+    private function call(array $options = [])
     {
-        $aOptions['body'] = $this->sContent;
-        $aOptions['query'] = $this->aMinifyOptions;
+        $options['body'] = $this->content;
+        $options['query'] = $this->minifyOptions;
 
-        return $this->oClient->post($this->sUri, $aOptions);
+        return $this->client->post($this->uri, $options);
     }
 
     /**
@@ -76,19 +76,18 @@ class LmmtfyResponse
      */
     public function toString()
     {
-        return (string)$this->call()->getBody();
+        return $this->call()->getBody()->getContents();
     }
 
     /**
      * Minify and save to file
      *
-     * @param string|resource $sFile Filename or resource to save minified result to
-     *
+     * @param string|resource $file Filename or resource to save minified result to
      * @return void
      */
-    public function saveTo($sFile)
+    public function saveTo($file)
     {
-        $this->call(['save_to' => $sFile]);
+        $this->call(['save_to' => $file]);
     }
 
     /**

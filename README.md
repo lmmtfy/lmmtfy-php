@@ -6,7 +6,7 @@ Installation
 
 Make sure you have [Composer](https://getcomposer.org/) installed and add lmmtfy-php as a dependency.
 
-```PHP
+```bash
 # Add lmmtfy-php as a dependency
 composer require lmmtfy/lmmtfy-php
 ```
@@ -34,18 +34,6 @@ $minified = $lmmtfy->css(fopen('test.css', 'r'))->toString();
 
 // And write the result directly to a file
 $lmmtfy->css(fopen('test.css', 'r'))->saveTo('test.min.css');
-```
-
-### Asynchronous API client
-
-```PHP
-// Start by initializing the async API client 
-$lmmtfy = new Lmmtfy\Async();
-
-// After that you can minify a string
-$lmmtfy->css('body { color: #ff0000; }', function($minified) {
-	var_dump($minified);
-});
 ```
 
 Todo
